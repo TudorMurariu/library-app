@@ -1,14 +1,21 @@
 package library.domain
 
-import java.util.*
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import java.util.UUID
 
+@Entity
 class Book(
-    id: UUID,
-    title: String,
-    author: String,
-    nrOfPages: Int,
-    description: String,
-    link: String?)
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    var id: UUID,
+    var title: String,
+    var author: String,
+    var nrOfPages: Int,
+    var description: String,
+    var link: String?)
 {
-    constructor() : this(UUID.randomUUID(), "", "", 0, "", "") {}
+    constructor() : this(UUID.randomUUID(), "", "", 0, "", "")
 }
