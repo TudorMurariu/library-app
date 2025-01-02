@@ -24,6 +24,12 @@ class UserController(
             repository.findById(it)
         }
 
+    @GetMapping("/users/name/{userName}")
+    fun oneByUserName(@PathVariable userName: String) =
+        userName.let {
+            repository.findByUsername(it)
+        }
+
     @PutMapping("/users/{id}")
     fun replaceUser(@RequestBody newUser: User, @PathVariable id: UUID?) =
         id?.let {
