@@ -78,7 +78,7 @@ const ApiService = {
     }
   },
 
-  createBook: async (bookData: Partial<Book>): Promise<Book> => {
+  createBook: async (bookData: Book): Promise<Book> => {
     try {
       const response = await axios.post<Book>(`${API_BASE_URL}/books`, bookData);
       return response.data;
@@ -87,7 +87,7 @@ const ApiService = {
     }
   },
 
-  updateBook: async (id: string, bookData: Partial<Book>): Promise<Book> => {
+  updateBook: async (id: string, bookData: Book): Promise<Book> => {
     try {
       const response = await axios.put<Book>(`${API_BASE_URL}/books/${id}`, bookData);
       return response.data;
