@@ -14,8 +14,6 @@ function LogIn() {
         console.log("AAA")
         let user: User = await service.getUserByUserName(userName)
 
-        console.log(user)
-
         if (!user)
             return;
 

@@ -10,7 +10,7 @@ import java.util.UUID
 data class Book(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    var id: UUID?,
+    var id: UUID? = null,
     var title: String,
     var author: String,
     var nrOfPages: Int,
