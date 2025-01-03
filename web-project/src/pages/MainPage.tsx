@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function MainPage() {
     const navigate = useNavigate();
     const [books, setBooks] = useState<Book[]>([]);
-    let search = ""
+    const [search, setSearch] = useState("")
 
     useEffect(() => {  
         fetchBooks();
@@ -27,22 +27,25 @@ function MainPage() {
         navigate("/new")
     }
 
-    function handleSearch() {
-        const fetchBooks = async () => {
-            try {
-              const fetchedBooks = await service.getBooks();
-              setBooks(fetchedBooks);
-            } catch (error) {
-              console.error('Error fetching books:', error);
-            }
-          };
-      
-        fetchBooks();
+    async function handleSearch(title: string) {
+      setSearch(title)
+
+      if(title.trim() === "") {
+        await fetchBooks();
+        return
+      }
+
+      try {
+        const fetchedBooks = await service.filterBooksByTitle(title);
+        setBooks(fetchedBooks);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+      }
     }
 
     return(
         <>
-            <TextField id="standard-basic" label="Search book by title" variant="standard" value={search} onChange={handleSearch}/>
+            <TextField id="standard-basic" label="Search book by title" variant="standard" value={search} onChange={(e) => handleSearch(e.target.value)}/>
             <br/>
             {books.map((book) => {
                 return <Card key={book.id} item={book} func={fetchBooks} />

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.UUID
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = ["http://localhost:5173"])
 class BookController(
     val repository: BookRepo
 ) {
@@ -14,10 +14,10 @@ class BookController(
     fun all() =
         repository.findAll()
 
-    @GetMapping("/users/title/{title}")
+    @GetMapping("/books/title/{title}")
     fun allByTitle(@PathVariable title: String) =
         title.let {
-            repository.findByTitle(it)
+            repository.findByTitleStartingWith(it)
         }
 
     @PostMapping("/books")

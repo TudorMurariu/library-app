@@ -69,6 +69,15 @@ const ApiService = {
     }
   },
 
+  filterBooksByTitle: async (title: string): Promise<Book[]> => {
+    try {
+      const response = await axios.get<Book[]>(`${API_BASE_URL}/books/title/${title}`);
+      return response.data;
+    } catch (error: any) {
+      throw error.response ? error.response.data : error;
+    }
+  },
+
   getBookById: async (id: string): Promise<Book> => {
     try {
       const response = await axios.get<Book>(`${API_BASE_URL}/books/${id}`);
