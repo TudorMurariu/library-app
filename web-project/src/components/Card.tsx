@@ -1,12 +1,19 @@
 import { Button } from "@mui/material";
 import Book from "../entities/Book";
 import './Card.css';
+import { useNavigate } from "react-router-dom";
 
 interface CardProps {
     item: Book;
 }
 
 function Card( {item: { id, title, author, nrOfPages, description, link }} : CardProps) {
+    const navigate = useNavigate();
+
+    function handleUpdateBook() {
+        navigate("/new", { state: { book: {id, title, author, nrOfPages, description, link} } })
+    }
+
     return(
         <div className="card" key={id}>
             <h2 className='title'>
@@ -26,7 +33,7 @@ function Card( {item: { id, title, author, nrOfPages, description, link }} : Car
                 <b>Link:</b> {link}
             </p> 
             }
-            <Button variant="contained">EDIT</Button>
+            <Button variant="contained" onClick={handleUpdateBook}>EDIT</Button>
         </div>
     );
 }

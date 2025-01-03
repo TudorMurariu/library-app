@@ -19,7 +19,7 @@ function AddBookPage() {
 
     useEffect(() => {
         console.log(book)
-        if(book === undefined) 
+        if(book === undefined)
             return
 
         setTitle(book.title)
