@@ -1,10 +1,10 @@
 interface Book {
-    id: string,
+    id: string | undefined,
     title: string,
     author: string,
     nrOfPages: number,
     description: string,
-    link: string
+    link: string | undefined
 }
 
 export default Book;
