@@ -14,10 +14,15 @@ class BookController(
     fun all() =
         repository.findAll()
 
+    @GetMapping("/users/title/{title}")
+    fun allByTitle(@PathVariable title: String) =
+        title.let {
+            repository.findByTitle(it)
+        }
+
     @PostMapping("/books")
     fun newBook(@RequestBody newBook: Book?) =
-        newBook?.let { println("AAAAAAAAAAAAAAA + $newBook")
-            repository.save(it) }
+        newBook?.let { repository.save(it) }
 
     @GetMapping("/books/{id}")
     fun one(@PathVariable id: UUID?) =
