@@ -10,24 +10,24 @@ function MainPage() {
     const [books, setBooks] = useState<Book[]>([]);
     let search = ""
 
-    useEffect(() => {
-        const fetchBooks = async () => {
-          try {
-            const fetchedBooks = await service.getBooks();
-            setBooks(fetchedBooks);
-          } catch (error) {
-            console.error('Error fetching books:', error);
-          }
-        };
-    
+    useEffect(() => {  
         fetchBooks();
       }, []);
 
-      function handleAddBook() {
-        navigate("/new")
-      }
+    const fetchBooks = async () => {
+        try {
+          const fetchedBooks = await service.getBooks();
+          setBooks(fetchedBooks);
+        } catch (error) {
+          console.error('Error fetching books:', error);
+        }
+    };
 
-      function handleSearch() {
+    function handleAddBook() {
+        navigate("/new")
+    }
+
+    function handleSearch() {
         const fetchBooks = async () => {
             try {
               const fetchedBooks = await service.getBooks();
@@ -37,15 +37,15 @@ function MainPage() {
             }
           };
       
-          fetchBooks();
-      }
+        fetchBooks();
+    }
 
     return(
         <>
-            <TextField id="standard-basic" label="Standard" variant="standard" value={search} onChange={handleSearch}/>
+            <TextField id="standard-basic" label="Search book by title" variant="standard" value={search} onChange={handleSearch}/>
             <br/>
             {books.map((book) => {
-                return <Card key={book.id} item={book} />
+                return <Card key={book.id} item={book} func={fetchBooks} />
             })}
             <br/> <br/>
             <Button variant="contained" onClick={handleAddBook}>ADD NEW BOOK</Button>

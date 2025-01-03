@@ -33,7 +33,7 @@ function AddBookPage() {
         navigate("/home")
     }
 
-    function handleDone() {
+    async function handleDone() {
         if(!title) {
             setAlertContent("Title can't be empty!")
             setAlert(true)
@@ -53,11 +53,16 @@ function AddBookPage() {
         }
 
         if(book)
-            service.updateBook(book.id, { id: book.id, title: title, author: author, nrOfPages: nrOfPages, description:description, link:link})
+            await service.updateBook(book.id, { id: book.id, title: title, author: author, nrOfPages: nrOfPages, description:description, link:link})
         else 
-            service.createBook({ id:undefined, title: title, author: author, nrOfPages: nrOfPages, description:description, link:link })
+            await service.createBook({ id:undefined, title: title, author: author, nrOfPages: nrOfPages, description:description, link:link })
         
         navigate("/home")
+    }
+
+    async function handleDeleteBook() {
+        await service.deleteBook(book.id!)
+        navigate("/home");
     }
 
     return(
@@ -76,7 +81,8 @@ function AddBookPage() {
             <TextField id="outlined-basic" label="link" variant="outlined" value={link} onChange={(e) => setLink(e.target.value)}/>
             <br/>
             <Button variant="contained" color="success" onClick={handleDone}>DONE</Button>
-            <Button variant="contained" color="error" onClick={handleCancel}>Cancel</Button>
+            {book && <Button variant="contained" color="error" onClick={handleDeleteBook}>DELETE</Button>}
+            <Button variant="contained" onClick={handleCancel}>Cancel</Button>
         </>
     )
 }

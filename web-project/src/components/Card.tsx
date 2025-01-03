@@ -2,16 +2,23 @@ import { Button } from "@mui/material";
 import Book from "../entities/Book";
 import './Card.css';
 import { useNavigate } from "react-router-dom";
+import service from "../services/service";
 
 interface CardProps {
     item: Book;
+    func: () => void;
 }
 
-function Card( {item: { id, title, author, nrOfPages, description, link }} : CardProps) {
+function Card( {item: { id, title, author, nrOfPages, description, link }, func} : CardProps) {
     const navigate = useNavigate();
 
     function handleUpdateBook() {
         navigate("/new", { state: { book: {id, title, author, nrOfPages, description, link} } })
+    }
+
+    async function handleDeleteBook() {
+        await service.deleteBook(id!)
+        func()
     }
 
     return(
@@ -34,6 +41,7 @@ function Card( {item: { id, title, author, nrOfPages, description, link }} : Car
             </p> 
             }
             <Button variant="contained" onClick={handleUpdateBook}>EDIT</Button>
+            <Button variant="contained" color="error" onClick={handleDeleteBook}>DELETE</Button>
         </div>
     );
 }
