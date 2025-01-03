@@ -27,7 +27,7 @@ class UserController(
     @GetMapping("/users/name/{userName}")
     fun oneByUserName(@PathVariable userName: String) =
         userName.let {
-            repository.findByUsername(it)
+            repository.findByUserName(it)
         }
 
     @PutMapping("/users/{id}")

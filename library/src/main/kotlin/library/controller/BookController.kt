@@ -16,7 +16,8 @@ class BookController(
 
     @PostMapping("/books")
     fun newBook(@RequestBody newBook: Book?) =
-        newBook?.let { repository.save(it) }
+        newBook?.let { println("AAAAAAAAAAAAAAA + $newBook")
+            repository.save(it) }
 
     @GetMapping("/books/{id}")
     fun one(@PathVariable id: UUID?) =

@@ -5,7 +5,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "\"user\"")
-class User(
+data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     var id: UUID? = null,
