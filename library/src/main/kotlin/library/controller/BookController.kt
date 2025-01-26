@@ -26,9 +26,7 @@ class BookController(
 
     @GetMapping("/books/{id}")
     fun one(@PathVariable id: UUID?) =
-        id?.let {
-            repository.findById(it)
-        }
+        id?.let { repository.findById(it) }
 
     @PutMapping("/books/{id}")
     fun replaceBook(@RequestBody newBook: Book, @PathVariable id: UUID?) =

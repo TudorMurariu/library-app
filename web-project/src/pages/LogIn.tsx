@@ -15,7 +15,10 @@ function LogIn() {
         let user: User = await service.getUserByUserName(userName)
 
         if (!user)
+        {
+            alert("Wrong credentials");
             return;
+        }
 
         if(user.userName == userName && user.password == pasword)
             navigate("/home", { state: { user } })
