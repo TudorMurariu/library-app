@@ -43,15 +43,20 @@ function MainPage() {
       }
     }
 
+    function handleLogOut() {
+      navigate("/")
+  }
+
     return(
         <>
             <TextField id="standard-basic" label="Search book by title" variant="standard" value={search} onChange={(e) => handleSearch(e.target.value)}/>
-            <br/>
+            <br/> <br/>
             {books.map((book) => {
                 return <Card key={book.id} item={book} func={fetchBooks} />
             })}
             <br/> <br/>
             <Button variant="contained" onClick={handleAddBook}>ADD NEW BOOK</Button>
+            <Button variant="contained" color="error" onClick={handleLogOut}>Log Out</Button>
         </>
     );
 }
