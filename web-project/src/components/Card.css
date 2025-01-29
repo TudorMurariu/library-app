@@ -6,6 +6,7 @@
     text-align: center;
     margin: 10px;
     display: inline-block;
+    height: 300px;
   }
   
   .card .title{
